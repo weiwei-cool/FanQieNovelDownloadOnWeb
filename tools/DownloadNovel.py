@@ -107,7 +107,7 @@ class DownloadNovel(threading.Thread):
                             try:
                                 api_data = get_api()
                             except Exception as e:
-                                tools.logger.error('错误！{e}')
+                                tools.logger.error(f'错误！{e}')
                             else:
                                 break
                             retry_get_api += 1
