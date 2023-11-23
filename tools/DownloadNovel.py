@@ -365,7 +365,7 @@ class DownloadNovel(threading.Thread):
                         text.add_item(nav_css1)
                         text.add_item(nav_css2)
 
-                        text.content = (f'<h2>{chapter_title}</h2>'
+                        text.content = (f'<h2 class="titlecss">{chapter_title}</h2>'
                                         f'{chapter_text}')
 
                         toc_index = toc_index + (text,)
