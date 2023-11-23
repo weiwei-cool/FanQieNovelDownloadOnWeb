@@ -399,7 +399,7 @@ class DownloadNovel(threading.Thread):
 
             # 拼接文件名和文件路径
             file_name = self.fanqie.title + ".epub"
-            file_path = os.path.join('/root/alist/book/books', file_name)
+            file_path = os.path.join(self.custom_path, file_name)
 
             # 书写电子书
             epub.write_epub(file_path, book, {})
