@@ -37,7 +37,8 @@ class DownloadNovel(threading.Thread):
         # 自定义保存路径
         self.custom_path = os.environ.get('CUSTOM_PATH')
         if not self.custom_path:
-            self.custom_path = '/root/alist/book/books'
+            self.custom_path = './books'
+            tools.logger.warning(f'您未设置自定义保存路径，将使用默认路径: {self.custom_path}')
 
         super().__init__()
 
