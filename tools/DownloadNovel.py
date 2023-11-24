@@ -37,7 +37,9 @@ class DownloadNovel(threading.Thread):
         # 自定义保存路径
         self.custom_path = os.environ.get('CUSTOM_PATH')
         if not self.custom_path:
-            self.custom_path = '/root/alist/book/books'
+            self.custom_path = './books'
+            os.makedirs(self.custom_path, exist_ok=True)
+            tools.logger.warning(f'您未设置自定义保存路径，将使用默认路径: {self.custom_path}')
 
         super().__init__()
 
@@ -107,7 +109,7 @@ class DownloadNovel(threading.Thread):
                             try:
                                 api_data = get_api()
                             except Exception as e:
-                                tools.logger.error('错误！{e}')
+                                tools.logger.error(f'错误！{e}')
                             else:
                                 break
                             retry_get_api += 1
@@ -358,7 +360,7 @@ class DownloadNovel(threading.Thread):
 
             # 拼接文件名和文件路径
             file_name = self.fanqie.title + ".epub"
-            file_path = os.path.join('/root/alist/book/books', file_name)
+            file_path = os.path.join(self.custom_path, file_name)
 
             # 书写电子书
             epub.write_epub(file_path, book, {})
