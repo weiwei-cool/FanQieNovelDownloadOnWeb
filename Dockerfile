@@ -1,5 +1,5 @@
 # 使用官方的Python基础镜像
-FROM python:3.9
+FROM python:3.11.6
 LABEL authors="weiwei"
 
 # 设置工作目录
