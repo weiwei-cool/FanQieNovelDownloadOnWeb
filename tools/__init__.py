@@ -4,6 +4,8 @@ from loguru import logger
 
 logger.add("./logs/fanqie_{time}.log", rotation="1 week", enqueue=True)
 
+version = '1.2.0'
+
 
 def rename(name):
     # 定义非法字符的正则表达式模式

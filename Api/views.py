@@ -104,7 +104,7 @@ def history_id(_request, pk):  # 根据具体obid查询小说下载数据
     return JsonResponse({'percent': history_entry.percent}, status=200)
 
 
-def get_config(_request):  # 获取默认的配置
+def get_config(_request):  # 获取信息
     # 公开下载链接
     public_url = os.environ.get('PUBLIC_URL')
 
@@ -115,6 +115,7 @@ def get_config(_request):  # 获取默认的配置
 
     ret = {
         'download_url': public_url,
-        'default_download_mode': default_download_mode
+        'default_download_mode': default_download_mode,
+        'version': tools.version
     }
     return JsonResponse(ret, status=200)

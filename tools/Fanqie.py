@@ -1,5 +1,6 @@
 import re
 import json
+from urllib.parse import parse_qs, urlparse
 import requests
 from bs4 import BeautifulSoup
 import tools
@@ -17,11 +18,13 @@ class FanqieNovel:
     }
 
     def __init__(self, url, mode):
-        response = requests.get(url, headers=self.headers)
+        self.book_id = None
         self.url = url
         self.mode = mode
+        self.parse_url(self.url)
+        response = requests.get(url=f"https://fanqienovel.com/page/{self.book_id}",
+                                headers=self.headers)
         self.html = response.text
-        self.book_id = re.search(r"/(\d+)", url).group(1)
 
         # obid: only-book-id 唯一小说识别码
         self.obid = f'{self.book_id}-{self.mode}'
@@ -50,3 +53,15 @@ class FanqieNovel:
     def __str__(self):
         return (f'FanqieNovel: {self.title}\n'
                 f'author: {self.author_name}')
+
+    def parse_url(self, url: str) -> str:
+        u = urlparse(url)
+
+        match u.netloc:  # 根据域名匹配
+            case "fanqienovel.com":  # Web 端
+                if u.path.startswith("/page/"):  # 书本详情页面
+                    match = re.search(r'/page/(\d+)', url)
+                    self.book_id = match.group(1)
+
+            case "changdunovel.com":  # App 分享链接
+                self.book_id = parse_qs(urlparse(url).query).get("book_id")[0]
