@@ -22,5 +22,6 @@ urlpatterns = [
     path('api/', include('Api.urls')),
     path('', views.index),
     path('history/', views.history),
+    path('eula/', views.eula),
     path('favicon.ico', RedirectView.as_view(url='/assets/favicon.ico')),
 ]

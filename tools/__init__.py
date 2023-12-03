@@ -4,7 +4,7 @@ from loguru import logger
 
 logger.add("./logs/fanqie_{time}.log", rotation="1 week", enqueue=True)
 
-version = '1.2.0'
+version = '1.2.1'
 
 
 def rename(name):

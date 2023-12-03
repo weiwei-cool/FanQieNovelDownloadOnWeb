@@ -7,3 +7,6 @@ def index(request):
 
 def history(request):
     return render(request, 'history/index.html')
+
+def eula(request):
+    return render(request, 'eula/index.html')
