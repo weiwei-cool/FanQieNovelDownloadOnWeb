@@ -10,9 +10,11 @@
  - 支持txt、epub格式保存
 
 ## 使用方法
-### 相关配置
-您可以在环境变量`CUSTOM_PATH`中添加数值来自定义您的保存路径  
-您可以在环境变量`DEFAULT_DMODE`中设置`txt`或`epub`来自定义前端默认的下载模式
+### 相关配置（环境变量）
+- `CUSTOM_PATH`: 为下载文件自定义保存路径（本地）
+- `DEFAULT_DMODE`: 设置前端中默认的下载模式，可接受的值： `txt`, `epub`
+
+
 ### 源码运行
 您在以源码运行前请一定记得添加环境变量  
 您可在项目目录下的logs内找到日志  
@@ -36,6 +38,45 @@ docker run --name="fanqie"\
  -p 8000:8000\
  -d weiweicool/fanqie-novel-download-on-web
 ```
+
+### docker-compose（带文件列表服务）
+
+```
+FanQieNovel/
+└── docker-compose.yml
+```
+
+```yaml
+# docker-compose.yml
+version: "3"
+services:
+  backend:
+    image: weiweicool/fanqie-novel-download-on-web:latest
+    restart: always
+    ports:
+      - 8000:8000
+    volumes:
+      - ./books:/books
+    environment:
+      - DEFAULT_DMODE=txt
+      - CUSTOM_PATH=/books
+  
+  caddy:
+    image: caddy:alpine
+    restart: always
+    ports:
+      - 2015:2015
+    volumes:
+      - ./books:/data
+    command: "caddy file-server --root /data --browse --listen :2015"
+```
+
+```bash
+cd FanQieNovel/
+docker-compose up -d
+```
+
+访问 `:8000` 访问本项目，访问 `:2015` 查看下载完成的文件。
 
 ### WebDAV模式
 如果您**想要**开启**WebDav**模式，请设置环境变量：  
