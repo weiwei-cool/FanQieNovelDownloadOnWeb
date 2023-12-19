@@ -69,12 +69,13 @@ def download(request):  # 下载接口
 def download_del(_request, pk):  # 删除任务中的小说
     global download_object
     try:
-        history_ = History.objects.get(obid=pk)
-        for i in download_object:
-            if i['obid'] == pk:
-                i['obj'].stop()
-                tools.logger.info(f'《{i["book"].title}》已从下载列表中移除')
-        history_.delete()
+        history_ = History.objects.filter(obid=pk)
+        for j in history_:
+            for i in download_object:
+                if i['obid'] == pk:
+                    i['obj'].stop()
+                    tools.logger.info(f'《{i["book"].title}》已从下载列表中移除')
+            j.delete()
         response_data = {'status': 'ok'}
         return JsonResponse(response_data, status=200)
     except Exception as e:
