@@ -10,6 +10,7 @@
  - 支持txt、epub格式保存
 
 ## 使用方法
+更详细的配置请参看 [文档](https://fanqie-wiki.flystudiokey.cn/#/quicklystart)
 ### 相关配置（环境变量）
 - `CUSTOM_PATH`: 为下载文件自定义保存路径（本地）
 - `DEFAULT_DMODE`: 设置前端中默认的下载模式，可接受的值： `txt`, `epub`
