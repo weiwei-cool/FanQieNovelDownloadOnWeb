@@ -21,9 +21,14 @@ import{_ as l,a as s,c as p,b as r,n as a,l as o,k as c}from"./bootstrap.min-045
                以搭建、使用或运行FanQieNovelDownloadOnWeb 番茄小说下载器（以下简称"软件"）。\r
                </p>\r
                <p class="fs-4">\r
-               1.2 软件范围：本许可的范围限于使用、修改本软件的权利。\r
+               1.2 代码许可：我们以GPLv3.0许可证授予您对于我们的软件的代码的许可，以二次开发、修改、拆分或修改软件。\r
+               您的任何行为（包括但不限于修改、使用、分发本软件或直接使用本软件）都应该遵守GPLv3.0许可证和本协议\r
+               （当GPLv3.0与本协议产生冲突时，以GPLv3.0许可证为准）。\r
+               </p>\r
+               <p class="fs-4">\r
+               1.3 软件范围：本许可的范围限于使用、修改本软件的权利。\r
                您可以对软件进行二次开发、拆分或修改，可以根据源码创建衍生产品。\r
-               但您在发布时必须遵守GPLv3.0协议，同时，您可以在本协议中添加您自己的条款,但您必须保留本协议且不得移除本协议中的任何条款。\r
+               但您在发布时必须遵守GPLv3.0许可证，同时，您可以在本协议中添加您自己的条款,但您必须保留本协议且不得移除本协议中的任何条款。\r
                </p>\r
                <br />\r
                <p class="fs-4" style="font-weight: bold;">2. 所有权</p>\r
@@ -57,7 +62,7 @@ import{_ as l,a as s,c as p,b as r,n as a,l as o,k as c}from"./bootstrap.min-045
                3.5 书籍 版权归 原作者 所有，\r
                使用番茄小说下载器下载的小说仅供您个人学习使用，您不得修改、传播小说原作者的书籍。\r
                您应遵守版权法，不得侵犯版权法规定的著作权和其他合法权利。\r
-               您应不遵守法律规定而与 书籍 原作者 产生的所有版权问题，我们概不负责。\r
+               您因不遵守法律规定而与 书籍 原作者 产生的所有版权问题，我们概不负责。\r
                </p>\r
                <p class="fs-4">\r
                3.6 您因使用番茄小说下载器而产生的一切后果由用户自己承担，\r
@@ -87,6 +92,6 @@ import{_ as l,a as s,c as p,b as r,n as a,l as o,k as c}from"./bootstrap.min-045
                <p class="fs-4">\r
                如有任何问题或疑虑，请联系FlyStudioKey：\r
                <br />\r
-               Email:fsk@mail.flystudiokey.cn\r
+               Email:main@mail.flystudiokey.cn\r
                </p>\r
                `}))}};c(y).mount("#app");
