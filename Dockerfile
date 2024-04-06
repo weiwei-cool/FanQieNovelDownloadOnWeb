@@ -13,7 +13,7 @@ COPY . /app/
 
 # 安装 Python 依赖
 RUN pip install -r requirements.txt
-RUN pip install -r FanqieDecrypt-0.1.4-py3-none-any.whl
+RUN pip install FanqieDecrypt-0.1.4-py3-none-any.whl
 
 # 执行数据库迁移
 RUN python manage.py migrate
