@@ -184,12 +184,13 @@ class DownloadNovel(threading.Thread):
                                                                 context.get_content().decode()).group(1)
                                     chapter.html_content = re.sub(r'<h2.*?>.*?</h2>', '', chapter_content)
 
-                                    tools.logger.info(f'已从本地获取 {chapter.chapter_title}, 进度：{history_entry.percent}%')
-
                                     chapter_num_now += 1
                                     history_entry.percent = round(
                                         (chapter_num_now / book.chapter_num) * 100, 2)
                                     history_entry.save()
+
+                                    tools.logger.info(
+                                        f'已从本地获取 {chapter.chapter_title}, 进度：{history_entry.percent}%')
 
                                     continue
 

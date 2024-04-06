@@ -84,6 +84,10 @@ def download(request):  # 下载接口
                         return_url.append(i.title)
                         continue
                     elif format_ == 'epub':
+                        history_.delete()
+                        b = History(book_id=i.book_id, obid=obid, file_name=f'{i.title}.{format_}', percent=0)
+                        b.save()
+
                         d = DownloadNovel.DownloadNovel(i, format_)
                         download_object.append({'obid': obid, 'obj': d, 'book': i})
                         d.start()
