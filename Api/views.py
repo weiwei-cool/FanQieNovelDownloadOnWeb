@@ -37,18 +37,26 @@ def download(request):  # 下载接口
 
             # 获取书本信息
 
-            async def fetch_and_print_book_info(books):
-                semaphore = asyncio.Semaphore(4)  # 设置并发上限为4
+            # async def fetch_and_print_book_info(books):
+            #     semaphore = asyncio.Semaphore(4)  # 设置并发上限为4
+            #
+            #     async def fetch_book_info(book):
+            #         async with semaphore:
+            #             await book.get_book_info()
+            #             book.parse_web_page()
+            #             book.parse_volume()
+            #             book.parse_images()
+            #
+            #     tasks = [fetch_book_info(book) for book in books]
+            #     await asyncio.gather(*tasks)
 
-                async def fetch_book_info(book):
-                    async with semaphore:
-                        await book.get_book_info()
-                        book.parse_web_page()
-                        book.parse_volume()
-                        book.parse_images()
+            def fetch_and_print_book_info(books):
 
-                tasks = [fetch_book_info(book) for book in books]
-                await asyncio.gather(*tasks)
+                for book in books:
+                    book.get_book_info()
+                    book.parse_web_page()
+                    book.parse_volume()
+                    book.parse_images()
 
             def parse_url(url: str) -> str:
                 book_id = None
@@ -65,10 +73,11 @@ def download(request):  # 下载接口
                 return book_id
 
             cookie = os.environ.get('COOKIE')
+            tools.logger.info(f'使用cookie:{cookie}')
 
             books = [Book(parse_url(url), cookie) for url in urls]
-            asyncio.run(fetch_and_print_book_info(books))
-            [tools.logger.info(f'下载书籍:\n{book.__str__()}') for book in books]
+            fetch_and_print_book_info(books)
+            [tools.logger.info(f'下载书籍:\n{book.title}') for book in books]
 
             # 查看重复下载的书籍
             return_url = []
