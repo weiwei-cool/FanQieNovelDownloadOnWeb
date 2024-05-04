@@ -169,7 +169,8 @@ class DownloadNovel(threading.Thread):
             book.spine = ['nav', intro_e]
 
             try:
-                def get_text(_stop_event, book: Book, sleep: int, history_entry: History, updata_mode, book_o):
+                def get_text(_stop_event, book: Book, sleep: int, history_entry: History,
+                             updata_mode, book_o, book_epub):
                     chapter_num_now = 0
                     for volume in book:
                         volume.parse_chapter()
@@ -200,6 +201,16 @@ class DownloadNovel(threading.Thread):
                             chapter.get_html_content()
                             chapter.parse_content()
                             chapter.decrypt_content()
+                            chapter.parse_img_content()
+
+                            if chapter.img_tags:
+                                for index, img_url in enumerate(chapter.img_urls):
+                                    image_content = chapter.get_img_content(img_url)
+                                    image_item = epub.EpubItem(uid='image',
+                                                               file_name=f'Illustrations/{chapter.chapter_id_index}_{index}.jpg',
+                                                               media_type='image/jpeg', content=image_content)
+                                    book_epub.add_item(image_item)
+                                    tools.logger.info(f'已获取 {chapter.chapter_title} 的 图{index}')
 
                             chapter_num_now += 1
                             history_entry.percent = round(
@@ -219,7 +230,7 @@ class DownloadNovel(threading.Thread):
                 tools.logger.info(self.book.chapter_num)
 
                 get_text(self._stop_event, self.book, 0.25,
-                         history_entry, updata_mode, book_o)
+                         history_entry, updata_mode, book_o, book)
 
                 # 遍历每个卷
                 for volume in self.book:

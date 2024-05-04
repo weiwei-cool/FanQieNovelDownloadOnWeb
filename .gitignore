@@ -5,3 +5,5 @@ venv/
 Api/__pycache__/
 Api/migrations/__pycache__/
 FanQieNovelDownloadOnWeb/__pycache__/
+books/
+logs/
